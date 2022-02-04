@@ -1,9 +1,10 @@
 import './App.css';
+import Home from './containers/Home';
 
 function App() {
   return (
     <div className="App">
-       <h2>Mood tracker</h2>
+        <Home/>
     </div>
   );
 }
