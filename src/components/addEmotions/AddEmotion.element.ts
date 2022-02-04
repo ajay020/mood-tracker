@@ -6,7 +6,7 @@ import styled from "styled-components";
 
 export const CardWrapper = styled.div`
   border: 1px solid black;
-  background-color: lightgray;
+  /* background-color: lightgray; */
   width: 60%;
   /* height: 200px; */
   margin: 0 auto;
@@ -43,6 +43,7 @@ export const EmojiCaption = styled.caption`
  text-align: center;
  font-size:14px;
  line-height: 18px;
+ color : ${({color}) => color}
 `
 
 export const StyledInput = styled.input`

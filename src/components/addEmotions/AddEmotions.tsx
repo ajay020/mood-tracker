@@ -48,23 +48,23 @@ const Emojis = ({ size, color="gray", handleChosenEmoji }: EmojiPropType) => {
     <>
         <EmojiWrapper onClick={() => handleEmoji("angry")}>
           <ImAngry size={size} color={selectedEmoji === "angry" ? "red" : ""} />
-          <EmojiCaption>Angry</EmojiCaption>
+          <EmojiCaption color = {selectedEmoji === "angry" ? "red" : ""} >Angry</EmojiCaption>
         </EmojiWrapper>
         <EmojiWrapper onClick={() => handleEmoji("frustrated")}>
             <ImFrustrated size={size} color={selectedEmoji === "frustrated" ? "orange" : ""}  />
-            <EmojiCaption>Frustrated</EmojiCaption>
+            <EmojiCaption color={selectedEmoji === "frustrated" ? "orange" : ""}>Frustrated</EmojiCaption>
         </EmojiWrapper>
         <EmojiWrapper onClick={() => handleEmoji("neutral")}>
-            <ImNeutral size={size}color={selectedEmoji === "neutral" ? "blue" : ""}  />
-            <EmojiCaption>Okay</EmojiCaption>
+            <ImNeutral size={size}color={selectedEmoji === "neutral" ? "lightblue" : ""}  />
+            <EmojiCaption color={selectedEmoji === "neutral" ? "lightblue" : ""}>Okay</EmojiCaption>
         </EmojiWrapper>
         <EmojiWrapper onClick={() => handleEmoji("wondering")}>
-            <ImWondering size={size}color={selectedEmoji === "wondering" ? "green" : ""}  />
-            <EmojiCaption>Wondering</EmojiCaption>
+            <ImWondering size={size}color={selectedEmoji === "wondering" ? "blue" : ""}  />
+            <EmojiCaption color={selectedEmoji === "wondering" ? "blue" : ""} >Wondering</EmojiCaption>
         </EmojiWrapper>
         <EmojiWrapper onClick={() => handleEmoji("happy")}>
-            <ImSmile size={size}color={selectedEmoji === "happy" ? "greenyellow" : ""}  />
-            <EmojiCaption>Happy</EmojiCaption>
+            <ImSmile size={size}color={selectedEmoji === "happy" ? "green" : ""}  />
+            <EmojiCaption color={selectedEmoji === "happy" ? "green" : ""} >Happy</EmojiCaption>
         </EmojiWrapper>
     </>
   );
