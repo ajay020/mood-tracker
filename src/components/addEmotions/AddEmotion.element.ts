@@ -6,11 +6,11 @@ import styled from "styled-components";
 
 export const CardWrapper = styled.div`
   border: 1px solid black;
-  /* background-color: lightgray; */
+  background-color: lightgray;
   width: 60%;
   /* height: 200px; */
   margin: 0 auto;
-  padding: 0.5rem;
+  /* padding: 0.5rem; */
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -35,27 +35,29 @@ export const EmojiWrapper = styled.span`
     cursor: pointer;
     /* background:pink; */
     &:hover{
-        background:pink;
+        /* background:pink; */
         transform: translate(.2px, .4px);
     }
 `
-export const EmojiCaption = styled.caption`
+export const EmojiCaption = styled.span`
  text-align: center;
  font-size:14px;
  line-height: 18px;
+ display:block;
  color : ${({color}) => color}
 `
 
-export const StyledInput = styled.input`
+export const StyledInput = styled.textarea`
   padding: 10px;
   margin-top: 8px;
   border: none;
   width: 100%;
+  outline:none;
   box-sizing: border-box;
 `;
 
 type EmotionChipPropType = {
-    selected:boolean 
+    selected?:boolean 
 }
 export const EmotionChip = styled.span`
   padding: 1px 4px;
@@ -78,6 +80,8 @@ export const ButtonSave = styled.button`
   background: green;
   padding: 8px 12px;
   color: white;
+  width:60%;
+  margin: 0 auto;
 `;
 
 type HeadingTextProp = {

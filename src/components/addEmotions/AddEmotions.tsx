@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { IconContext } from "react-icons/lib";
+import { v4 as uuidv4 } from 'uuid';
 import {
     ImWondering,
     ImNeutral,
@@ -11,9 +13,10 @@ import {
     ImFrustrated2,
     ImSmile,
     ImSmile2,
+    ImCool,
+    ImSad
   } from "react-icons/im";
 
-  import { IconContext } from "react-icons/lib";
 
 import {
         CardWrapper,
@@ -29,6 +32,9 @@ import {
         EmojiCaption,
         Angry,
     } from "./AddEmotion.element";
+import { negativeEmotions, positiveEmotions, activities } from './../../data';
+import { useAppDispatch } from "../../app/hook";
+import { addEmotion } from "../../features/emotionSlice";
 
 type EmojiPropType = {
     size: string,
@@ -50,17 +56,17 @@ const Emojis = ({ size, color="gray", handleChosenEmoji }: EmojiPropType) => {
           <ImAngry size={size} color={selectedEmoji === "angry" ? "red" : ""} />
           <EmojiCaption color = {selectedEmoji === "angry" ? "red" : ""} >Angry</EmojiCaption>
         </EmojiWrapper>
-        <EmojiWrapper onClick={() => handleEmoji("frustrated")}>
-            <ImFrustrated size={size} color={selectedEmoji === "frustrated" ? "orange" : ""}  />
-            <EmojiCaption color={selectedEmoji === "frustrated" ? "orange" : ""}>Frustrated</EmojiCaption>
+        <EmojiWrapper onClick={() => handleEmoji("sad")}>
+            <ImSad size={size} color={selectedEmoji === "sad" ? "blue" : ""}  />
+            <EmojiCaption color={selectedEmoji === "sad" ? "blue" : ""}>Sad</EmojiCaption>
         </EmojiWrapper>
         <EmojiWrapper onClick={() => handleEmoji("neutral")}>
             <ImNeutral size={size}color={selectedEmoji === "neutral" ? "lightblue" : ""}  />
             <EmojiCaption color={selectedEmoji === "neutral" ? "lightblue" : ""}>Okay</EmojiCaption>
         </EmojiWrapper>
-        <EmojiWrapper onClick={() => handleEmoji("wondering")}>
-            <ImWondering size={size}color={selectedEmoji === "wondering" ? "blue" : ""}  />
-            <EmojiCaption color={selectedEmoji === "wondering" ? "blue" : ""} >Wondering</EmojiCaption>
+        <EmojiWrapper onClick={() => handleEmoji("cool")}>
+            <ImCool size={size}color={selectedEmoji === "cool" ? "yellowgreen" : ""}  />
+            <EmojiCaption color={selectedEmoji === "cool" ? "yellowgreen" : ""} >Cool</EmojiCaption>
         </EmojiWrapper>
         <EmojiWrapper onClick={() => handleEmoji("happy")}>
             <ImSmile size={size}color={selectedEmoji === "happy" ? "green" : ""}  />
@@ -77,39 +83,11 @@ type EmotionsProp = {
 }
 
 const Emotions = ({emotionType, handleChosenEmotions, chosenEmotions}: EmotionsProp) => {
-    const [selected, setSelected] = useState(false);
-
-  let negativeEmotions = [
-    "Lost",
-    "Worried",
-    "Confused",
-    "Happy",
-    "Sad",
-    "Frustrated",
-    "stressed",
-    "Overwelming",
-  ];
-
-  let positiveEmotions = [
-      "Happy",
-      "Excited",
-      "Calm",
-      "Content",
-      "Hopeful"
-  ]
-
-  let activities = [
-      "Work", "Family", "Exercise", "Food", "Games", "Shopping", "Hobby"
-  ]
 
   const chooseEmotion = emotionType === "positive" ?
                         positiveEmotions : (emotionType === "negative" ?
                         negativeEmotions : activities);
-
-
-  const handleSelected = () =>{
-      setSelected(preSelected => !preSelected);
-  }                      
+                   
 
   return (
     <EmotionChipWrapper>
@@ -129,7 +107,10 @@ const Emotions = ({emotionType, handleChosenEmotions, chosenEmotions}: EmotionsP
 const AddEmotions = () => {
     const [emotionType, setEmotionType] = useState("positive");
     const [chosenEmotions, setChosenEmotions] = useState<string[]>([]);
-    const [chosenEmoji, setChosenEmoji] = useState("");
+    const [chosenEmoji, setChosenEmoji] = useState<string>("");
+    const [emotionDesc, setEmotionDesc] = useState<string>("");
+
+    const dispatch = useAppDispatch();
 
     const selectPositive = () =>{
         setEmotionType("positive");
@@ -150,7 +131,22 @@ const AddEmotions = () => {
     const handleChosenEmoji = (emoji: string) =>{
         setChosenEmoji(emoji);
     }
-    // console.log(chosenEmotions);
+
+    const handleAddEmotions = ()=>{
+        const newEmotion = {
+            id: uuidv4(),
+            chosenEmoji,
+            chosenEmotions,
+            emotionDesc
+        }
+        if(chosenEmoji){
+            dispatch(addEmotion(newEmotion))
+        }
+        // console.log(newEmotion);
+        setChosenEmoji("");
+        setChosenEmotions([]);
+        setEmotionDesc("");
+    }
 
   return (
       <IconContext.Provider value={{color:'black'}}>
@@ -179,21 +175,28 @@ const AddEmotions = () => {
                 {
                     emotionType
                         ? <Emotions
-                        chosenEmotions={chosenEmotions}
+                            chosenEmotions={chosenEmotions}
                             emotionType = {emotionType}
                             handleChosenEmotions={handleChosenEmotions} /> 
                         : <Emotions
-                        chosenEmotions={chosenEmotions}
+                            chosenEmotions={chosenEmotions}
                             emotionType = {emotionType} 
                             handleChosenEmotions = {handleChosenEmotions}/>
                 }
 
-            <HeadingText  fontSize="medium">What activities have you been doing?</HeadingText>
-            <Emotions emotionType="activities" handleChosenEmotions={handleChosenEmotions} chosenEmotions={chosenEmotions}/>
+                <HeadingText  fontSize="medium">What activities have you been doing?</HeadingText>
+                <Emotions
+                    emotionType="activities" 
+                    handleChosenEmotions={handleChosenEmotions}
+                    chosenEmotions={chosenEmotions}
+                />
             </EmotionContainer>
 
-            <StyledInput placeholder="Describe your emotions..." />
-            <ButtonSave>Save</ButtonSave>
+            <StyledInput
+              value={emotionDesc}
+               onChange={(e) => setEmotionDesc(e.target.value)} 
+              placeholder="Describe your emotions..." />
+            <ButtonSave onClick={handleAddEmotions}>Save</ButtonSave>
         </CardWrapper>
     </IconContext.Provider>
   );
