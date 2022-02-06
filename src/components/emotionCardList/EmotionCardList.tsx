@@ -10,7 +10,7 @@ function EmotionList() {
     return (
         <>
         {
-            emotions.map( (emotion: EmotionType) => <EmotionCard  emotion = {emotion}/>)
+            emotions.map( (emotion: EmotionType) => <EmotionCard key={emotion.id} emotion = {emotion}/>)
         }
         </>
      );

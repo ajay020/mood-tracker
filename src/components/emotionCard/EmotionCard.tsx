@@ -1,7 +1,8 @@
 import styled from 'styled-components';
-import {ImAngry, ImHappy, ImSmile, ImCool, ImSad, ImNeutral} from 'react-icons/im'
 import { EmotionType } from '../../features/emotionSlice';
 import { EmotionChip } from '../addEmotions/AddEmotion.element';
+import Moment from 'react-moment';
+import { EmojiIcon } from '..';
 
 const CardWrapper = styled.div`
     border: 1px solid black;
@@ -23,6 +24,11 @@ const CardBody = styled.div`
     margin-top: 4px;
     text-align:start;
 `
+
+const CardDate = styled(Moment)`
+    /* background: olive; */
+`
+
 const CardImg = styled.div`
     width: 42px;
     height: 42px;
@@ -51,33 +57,12 @@ const Wrapper = styled.div`
     flex-wrap: wrap;
 `
 const CardBodyContent = styled.div`
-    
 `
-
 
 type EmotionCardPropType = {
  emotion : EmotionType    
 }
 
-type IconPropType = {
-    size:string,
-    type:string 
-}
-
-const Icon = ({type, size}: IconPropType) => {
-    if(type === "angry"){
-        return <ImAngry size={size} color={"red"}/>
-    }else if(type === "cool"){
-        return <ImCool size={size} color={"yellowgreen"}/>
-    }else if(type === "sad"){
-        return <ImSad size={size} color={"blue"}/>
-    }else if(type === "neutral"){
-        return <ImNeutral size={size} color={"lightblue"}/>
-    }else if(type === "happy"){
-        return <ImSmile size={size} color={"green"}/>
-    }
-    return <ImNeutral size={size} color={"yellow"}/>
-}
 
 const EmotionCard = ({emotion}: EmotionCardPropType) => {
 
@@ -85,12 +70,12 @@ const EmotionCard = ({emotion}: EmotionCardPropType) => {
         <CardWrapper>
             <CardHeader>
                 <CardImg>
-                    <Icon type={emotion.chosenEmoji} size={"35px"} />
+                    <EmojiIcon type={emotion.chosenEmoji} size={"35px"} />
                 </CardImg>
                 <CardHeaderInfo>
-                    <CardTitle fontWeight={"400"}>
-                        11 february, 2022   
-                    </CardTitle> 
+                    <CardDate format="hh:mm A">
+                        {emotion.date} 
+                    </CardDate> 
                     <CardTitle fontWeight={"500"}>
                        
                         {emotion.chosenEmoji}
@@ -100,7 +85,7 @@ const EmotionCard = ({emotion}: EmotionCardPropType) => {
             <CardBody>
                 <Wrapper>
                     {
-                        emotion.chosenEmotions.map(em => <EmotionChip>{em}</EmotionChip>)
+                        emotion.chosenEmotions.map(em => <EmotionChip key={em}>{em}</EmotionChip>)
                     }
                 </Wrapper>
                 <CardBodyContent>

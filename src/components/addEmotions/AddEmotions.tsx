@@ -1,18 +1,17 @@
 import { useState } from "react";
 import { IconContext } from "react-icons/lib";
 import { v4 as uuidv4 } from 'uuid';
+import { negativeEmotions, positiveEmotions, activities } from './../../data';
+import { useAppDispatch } from "../../app/hook";
+import { addEmotion } from "../../features/emotionSlice";
 import {
     ImWondering,
     ImNeutral,
-    ImNeutral2,
     ImConfused,
     ImCrying,
     ImAngry,
-    ImAngry2,
     ImFrustrated,
-    ImFrustrated2,
     ImSmile,
-    ImSmile2,
     ImCool,
     ImSad
   } from "react-icons/im";
@@ -32,9 +31,7 @@ import {
         EmojiCaption,
         Angry,
     } from "./AddEmotion.element";
-import { negativeEmotions, positiveEmotions, activities } from './../../data';
-import { useAppDispatch } from "../../app/hook";
-import { addEmotion } from "../../features/emotionSlice";
+
 
 type EmojiPropType = {
     size: string,
@@ -93,6 +90,7 @@ const Emotions = ({emotionType, handleChosenEmotions, chosenEmotions}: EmotionsP
     <EmotionChipWrapper>
       {chooseEmotion.map((emotion) => (
         <EmotionChip 
+        cursor="true"
         onClick={()=> handleChosenEmotions(emotion)}
         key={emotion}
         selected={chosenEmotions.includes(emotion)}
@@ -135,6 +133,7 @@ const AddEmotions = () => {
     const handleAddEmotions = ()=>{
         const newEmotion = {
             id: uuidv4(),
+            date: new Date(),
             chosenEmoji,
             chosenEmotions,
             emotionDesc
