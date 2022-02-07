@@ -1,8 +1,10 @@
 import styled from 'styled-components';
-import { EmotionType } from '../../features/emotionSlice';
+import { deleteEmotion, EmotionType } from '../../features/emotionSlice';
 import { EmotionChip } from '../addEmotions/AddEmotion.element';
 import Moment from 'react-moment';
 import { EmojiIcon } from '..';
+import {FaTrash} from 'react-icons/fa'
+import { useAppDispatch } from './../../app/hook';
 
 const CardWrapper = styled.div`
     border: 1px solid black;
@@ -18,6 +20,7 @@ const CardHeader = styled.div`
     /* background:purple; */
     display:flex;
     align-items: center;
+    /* justify-content: space-between; */
 `
 const CardBody = styled.div`
     /* background:red; */
@@ -49,6 +52,14 @@ const CardTitle = styled.h4<CardTitleProps>`
 const CardHeaderInfo = styled.div`
     /* background: black; */
 `
+const TrasWrapper = styled(FaTrash)`
+    margin-left: auto;
+    cursor:pointer;
+    padding:2px;
+    &:hover{
+        color:red;
+    }
+`
 
 const Wrapper = styled.div`
     /* background:goldenrod; */
@@ -65,6 +76,11 @@ type EmotionCardPropType = {
 
 
 const EmotionCard = ({emotion}: EmotionCardPropType) => {
+    const dispatch = useAppDispatch();
+
+    const handleDelete = (emotionId : string) =>{
+        dispatch(deleteEmotion(emotionId));
+    }
 
     return (
         <CardWrapper>
@@ -73,14 +89,14 @@ const EmotionCard = ({emotion}: EmotionCardPropType) => {
                     <EmojiIcon type={emotion.chosenEmoji} size={"35px"} />
                 </CardImg>
                 <CardHeaderInfo>
-                    <CardDate format="hh:mm A">
+                    <CardDate format="ddd-MMM hh:mm A">
                         {emotion.date} 
                     </CardDate> 
                     <CardTitle fontWeight={"500"}>
-                       
                         {emotion.chosenEmoji}
                     </CardTitle>   
                  </CardHeaderInfo>
+                 <TrasWrapper onClick={()=>  handleDelete(emotion.id)}/>
             </CardHeader>
             <CardBody>
                 <Wrapper>

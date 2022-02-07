@@ -1,32 +1,30 @@
 import styled from "styled-components";
 import { AddEmotions, EmotioncardList } from "../components"
 import Calendar from 'react-calendar';
-import { useState } from "react";
-import '../Calander.css';
-import { ImAngry } from 'react-icons/im';
 import { useAppSelector } from "../app/hook";
 import {  getEmotions } from './../features/emotionSlice';
 import { EmojiIcon } from "../components";
+import '../Calander.css';
 
 const HomeContainer = styled.div`
     background:wheat;
     display:flex;
 `
 const CalanderContainer = styled.aside`
-    background: purple;
+    /* background: purple; */
     margin:  1rem;
     flex: 1;
   }
-
 `
 const Wrapper = styled.div`
     background: tomato;
     flex:2;
 `
 
-const CustomTile = () => {
-    return <h1>Hello</h1>
-}
+const EmojiWrapper = styled.span`
+    margin-left:2px;
+    /* background:black; */
+`
 
 type TileContentPorp = {
     activeStartDate: Date 
@@ -35,15 +33,18 @@ type TileContentPorp = {
 }
 
 const Home =() => {
-    const [value, onChange] = useState();
     const emotions = useAppSelector(getEmotions);
 
     const handleTileContent = ({ activeStartDate, date, view }: TileContentPorp) =>{
 
-        const emotion  = emotions.filter(emotion => emotion.date.getTime() === date.getTime());
-        console.log(emotion);
-        if(emotion[0]){
-            return <EmojiIcon type={emotion[0].chosenEmoji} size="34px"/>
+        const emotion  = emotions.find(emotion => emotion.date.getTime() === date.getTime());
+        // console.log(emotion);
+        if(emotion){
+            return(
+                    <EmojiWrapper> 
+                        <EmojiIcon type={emotion.chosenEmoji} size="24px"/>
+                    </EmojiWrapper>
+                 );
         }
 
         return null;
@@ -54,7 +55,6 @@ const Home =() => {
             <CalanderContainer>
                 <Calendar 
                     tileContent = {handleTileContent}
-                    value={value} 
                  />
             </CalanderContainer>
             <Wrapper>

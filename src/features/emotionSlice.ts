@@ -38,7 +38,6 @@ const initialState: EmotionState = {
             emotionDesc:"It's a relaxing day"
         }
     ]
-    
 }
 
 export const emotionSlice = createSlice({
@@ -47,13 +46,16 @@ export const emotionSlice = createSlice({
     reducers:{
         addEmotion : (state, action) =>{
             state.emotions = [...state.emotions, action.payload];
+        },
+        deleteEmotion: (state, action) => {
+            state.emotions = state.emotions.filter(em => em.id !== action.payload);
         }
     }
 });
 
-export const  {addEmotion} = emotionSlice.actions;
+export const  {addEmotion, deleteEmotion} = emotionSlice.actions;
 
 export const getEmotions = (state: RootState)=>  state.emotions.emotions
-// export const getDates = (state: RootState) => state.emotions.emotions.map(em => em.date);
+
 export default emotionSlice.reducer;
 
