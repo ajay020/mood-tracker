@@ -52,12 +52,28 @@ const CardTitle = styled.h4<CardTitleProps>`
 const CardHeaderInfo = styled.div`
     /* background: black; */
 `
-const TrasWrapper = styled(FaTrash)`
+const TrashTooltip = styled.span`
+    background:white;
+    position:absolute;
+    top:-24px;
+    left:0;
+    font-size:12px;
+    padding: .3rem;
+    color:red;
+    display:none;
+`
+const TrashWrapper = styled("div")`
     margin-left: auto;
     cursor:pointer;
-    padding:2px;
+    position:relative;
+    padding:4px;
+    /* background:teal; */
+
     &:hover{
         color:red;
+        ${TrashTooltip}{
+            display:block;
+        }
     }
 `
 
@@ -96,7 +112,11 @@ const EmotionCard = ({emotion}: EmotionCardPropType) => {
                         {emotion.chosenEmoji}
                     </CardTitle>   
                  </CardHeaderInfo>
-                 <TrasWrapper onClick={()=>  handleDelete(emotion.id)}/>
+                 
+                 <TrashWrapper onClick={()=>  handleDelete(emotion.id)}>
+                     <FaTrash/>
+                     <TrashTooltip>Delete</TrashTooltip>
+                 </TrashWrapper>
             </CardHeader>
             <CardBody>
                 <Wrapper>

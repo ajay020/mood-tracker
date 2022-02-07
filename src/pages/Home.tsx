@@ -38,7 +38,6 @@ const Home =() => {
     const handleTileContent = ({ activeStartDate, date, view }: TileContentPorp) =>{
 
         const emotion  = emotions.find(emotion => emotion.date.getTime() === date.getTime());
-        // console.log(emotion);
         if(emotion){
             return(
                     <EmojiWrapper> 
