@@ -1,16 +1,14 @@
 import styled from "styled-components";
-import { AddEmotions, EmotioncardList } from "../components"
-import Calendar from 'react-calendar';
 import { useAppSelector } from "../app/hook";
-import {  getEmotions } from './../features/emotionSlice';
-import { EmojiIcon } from "../components";
-import '../Calander.css';
+import { AddEmotions, BarChart, CalendarChart, EmotioncardList } from "../components"
+import { getEmotions } from "../features/emotionSlice";
+
 
 const HomeContainer = styled.div`
     background:wheat;
     display:flex;
 `
-const CalanderContainer = styled.aside`
+const ChartContainer = styled.aside`
     /* background: purple; */
     margin:  1rem;
     flex: 1;
@@ -20,42 +18,39 @@ const Wrapper = styled.div`
     background: tomato;
     flex:2;
 `
-
-const EmojiWrapper = styled.span`
-    margin-left:2px;
-    /* background:black; */
+const BarChartWrapper = styled.div`
+    background:black;
+    width:380px;
 `
 
-type TileContentPorp = {
-    activeStartDate: Date 
-    date: Date,
-    view: string
-}
-
 const Home =() => {
-    const emotions = useAppSelector(getEmotions);
 
-    const handleTileContent = ({ activeStartDate, date, view }: TileContentPorp) =>{
+    const emotions = useAppSelector(getEmotions)
 
-        const emotion  = emotions.find(emotion => emotion.date.getTime() === date.getTime());
-        if(emotion){
-            return(
-                    <EmojiWrapper> 
-                        <EmojiIcon type={emotion.chosenEmoji} size="24px"/>
-                    </EmojiWrapper>
-                 );
+    let moodCount:{[key:string]: number}  = {
+        angry:0,
+        sad:0,
+        neutral:0,
+        cool:0,
+        happy:0,
+    };
+
+    emotions.forEach(em => {
+        if(em.chosenEmoji){
+            moodCount[em.chosenEmoji]++;
         }
+    });
 
-        return null;
-    }
+    let moodFrequencies =  Object.values( moodCount);
 
     return(
         <HomeContainer>
-            <CalanderContainer>
-                <Calendar 
-                    tileContent = {handleTileContent}
-                 />
-            </CalanderContainer>
+            <ChartContainer>
+               <CalendarChart/>
+               <BarChartWrapper>
+                  <BarChart moodFrequencies={moodFrequencies} />
+               </BarChartWrapper>
+            </ChartContainer>
             <Wrapper>
                 <AddEmotions/>
                 <EmotioncardList/>

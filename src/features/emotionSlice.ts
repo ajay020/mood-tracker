@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { RootState } from "../app/store";
+import { fakeData } from "../data";
 
 
 export type EmotionType = {
@@ -7,7 +8,7 @@ export type EmotionType = {
     chosenEmoji:string,
     chosenEmotions: string[],
     emotionDesc: string ,
-    date: Date 
+    date: string
 }
 
 interface EmotionState{
@@ -16,27 +17,7 @@ interface EmotionState{
 
 const initialState: EmotionState = {
     emotions:[
-        {
-            id:"1",
-            date: new Date(2022, 1, 6),
-            chosenEmoji:"happy",
-            chosenEmotions:["happy"],
-            emotionDesc:"It's a great day"
-        },
-        {
-            id:"2",
-            date: new Date(2022, 1, 3),
-            chosenEmoji:"sad",
-            chosenEmotions:["tense"],
-            emotionDesc:"It's a blue day"
-        },
-        {
-            id:"3",
-            date: new Date(2022, 1, 1),
-            chosenEmoji:"cool",
-            chosenEmotions:["relax"],
-            emotionDesc:"It's a relaxing day"
-        }
+        ...fakeData
     ]
 }
 

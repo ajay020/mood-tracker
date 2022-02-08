@@ -133,7 +133,7 @@ const AddEmotions = () => {
     const handleAddEmotions = ()=>{
         const newEmotion = {
             id: uuidv4(),
-            date: new Date(),
+            date: new Date().getMilliseconds().toString(),
             chosenEmoji,
             chosenEmotions,
             emotionDesc
