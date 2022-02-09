@@ -46,17 +46,6 @@ export const EmojiCaption = styled.span`
  color : ${({color}) => color};
 `
 
-export const StyledInput = styled.textarea`
-  padding: 10px;
-  margin-top: 8px;
-  border: none;
-  outline:none;
-  margin: 12px 0;
-  box-sizing: border-box;
-  width:100%;
-  min-height: 100px;
-`;
-
 type EmotionChipPropType = {
     selected?:boolean 
     cursor?: string
@@ -71,10 +60,6 @@ export const EmotionChip = styled.span<EmotionChipPropType>`
   background: ${({selected}:EmotionChipPropType) => selected ? "darkblue":"" };
   color: ${({selected}:EmotionChipPropType) => selected ? "white" : "black"};
 
-  /* &:hover{
-      background-color: black;
-      color: white;
-  } */
 `;
 
 export const EmotionChipWrapper = styled.div`
@@ -85,15 +70,6 @@ export const EmotionChipWrapper = styled.div`
   justify-content:center;
 `;
 
-export const ButtonSave = styled.button`
-  background: black;
-  padding: 8px 12px;
-  border: none;
-  color: white;
-  width:40%;
-  margin: 0 auto;
-  cursor:pointer;
-`;
 
 type HeadingTextProp = {
     fontSize:string 

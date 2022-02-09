@@ -22,9 +22,7 @@ import styled from 'styled-components';
 import {
         CardWrapper,
         EmojiContainer,
-        StyledInput, 
         EmotionChipWrapper, 
-        ButtonSave ,
         EmotionChip,
         HeadingText,
         EmotionContainer,
@@ -36,6 +34,7 @@ import {
         LeftArrow,
         RightArrow
     } from "./AddEmotion.element";
+import SliderFour from "../slider/SliderFour";
 
 
 type EmojiPropType = {
@@ -111,7 +110,6 @@ const AddEmotions = () => {
     const [emotionType, setEmotionType] = useState("positive");
     const [chosenEmotions, setChosenEmotions] = useState<string[]>([]);
     const [chosenEmoji, setChosenEmoji] = useState<string>("");
-    const [emotionDesc, setEmotionDesc] = useState<string>("");
     const [currentIndex, setCurrentIndex] = useState<number>(0);
 
     const dispatch = useAppDispatch();
@@ -123,8 +121,7 @@ const AddEmotions = () => {
         setEmotionType("negative");
     }
 
-    
-
+    console.log("parent");
 
     const handleChosenEmotions = (emotion:string) =>{
         setChosenEmotions(prevChosen => {
@@ -141,23 +138,21 @@ const AddEmotions = () => {
     },[chosenEmoji]);
    
 
-    const handleAddEmotions = ()=>{
+    const handleAddEmotions = (emotionDescription: string)=>{
         const newEmotion = {
             id: uuidv4(),
             date: new Date().getMilliseconds().toString(),
             chosenEmoji,
             chosenEmotions,
-            emotionDesc
+            emotionDescription
         }
         if(chosenEmoji){
             dispatch(addEmotion(newEmotion))
         }
         setChosenEmoji("");
         setChosenEmotions([]);
-        setEmotionDesc("");
         setCurrentIndex(0);
     }
-
 
     const SlideOne = () => {
         return (
@@ -216,18 +211,8 @@ const AddEmotions = () => {
             </EmotionContainer>
         )
     }
-    const SlideFour = () =>{
-        return (
-            <EmotionContainer>
-             <StyledInput
-                value={emotionDesc}
-                onChange={(e) => setEmotionDesc(e.target.value)} 
-                placeholder="Describe your emotions..."
-                 />
-             <ButtonSave onClick={handleAddEmotions}>Save</ButtonSave>
-            </EmotionContainer>
-        )
-    }
+    const SlideFour = () => <SliderFour handleAddEmotions={handleAddEmotions}/>
+      
     const slides = [SlideOne, SlideTwo, SlideThree, SlideFour];
 
     const prvSlide = () =>{
@@ -246,8 +231,6 @@ const AddEmotions = () => {
             return prvIndex;
         });
     }
-
-
 
   return (
       <IconContext.Provider value={{color:'darkgray'}}>

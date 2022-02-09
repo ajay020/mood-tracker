@@ -5,7 +5,7 @@ import { getEmotions } from "../features/emotionSlice";
 
 
 const HomeContainer = styled.div`
-    background:wheat;
+    background:brown;
     display:flex;
 `
 const ChartContainer = styled.aside`
@@ -15,7 +15,7 @@ const ChartContainer = styled.aside`
   }
 `
 const Wrapper = styled.div`
-    background: tomato;
+    background: black;
     flex:2;
 `
 const BarChartWrapper = styled.div`
