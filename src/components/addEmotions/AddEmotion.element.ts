@@ -1,12 +1,14 @@
 import { ImAngry } from "react-icons/im";
 import { IconContext } from "react-icons/lib";
 import styled from "styled-components";
+import {FaChevronRight, FaChevronLeft} from 'react-icons/fa'
+
 
 export const CardWrapper = styled.div`
   border: 1px solid black;
   background-color: lightgray;
-  /* width: 60%; */
-  margin: 1rem;
+  width: 60%;
+  margin: 1rem auto;
   /* padding: 0.5rem; */
   display: flex;
   flex-direction: column;
@@ -22,7 +24,8 @@ export const Angry = styled(ImAngry)`
 `
 export const EmojiContainer = styled.div`
   display: flex;
-  justify-content: center;
+  flex-wrap:wrap;
+  /* justify-content: center; */
   /* background-color: green; */
   /* width: 70%; */
 `;
@@ -47,10 +50,11 @@ export const StyledInput = styled.textarea`
   padding: 10px;
   margin-top: 8px;
   border: none;
-  width: 60%;
   outline:none;
   margin: 12px 0;
   box-sizing: border-box;
+  width:100%;
+  min-height: 100px;
 `;
 
 type EmotionChipPropType = {
@@ -67,25 +71,28 @@ export const EmotionChip = styled.span<EmotionChipPropType>`
   background: ${({selected}:EmotionChipPropType) => selected ? "darkblue":"" };
   color: ${({selected}:EmotionChipPropType) => selected ? "white" : "black"};
 
-  &:hover{
+  /* &:hover{
       background-color: black;
       color: white;
-  }
+  } */
 `;
 
 export const EmotionChipWrapper = styled.div`
   /* background-color: lightblue; */
   display: flex;
   flex-wrap: wrap;
- 
+  width:70%;
+  justify-content:center;
 `;
 
 export const ButtonSave = styled.button`
-  background: green;
+  background: black;
   padding: 8px 12px;
+  border: none;
   color: white;
   width:40%;
   margin: 0 auto;
+  cursor:pointer;
 `;
 
 type HeadingTextProp = {
@@ -94,6 +101,7 @@ type HeadingTextProp = {
 }
 
 export const HeadingText = styled.h3`
+    /* background:orange; */
     font-size: ${ (props: HeadingTextProp) =>  props.fontSize};
     font-weight: 400;
     border-bottom: ${({bottomBorder}:HeadingTextProp) => bottomBorder ? "2px solid green" :"" };
@@ -103,12 +111,50 @@ export const HeadingText = styled.h3`
 export const EmotionContainer = styled.div`
     display: flex;
     flex-direction: column;
+    /* background: orange; */
+    align-items:center;
+    /* justify-content:center; */
+    padding:1rem;
 `
 
-export const EmotionHeading = styled.div`
+export const EmotionTabs = styled.div`
     display:flex;
     justify-content: space-evenly;
     /* background: grey; */
     width: 100%;
+`
+export const Slider = styled.div`
+ background:lightgray;
+ min-height: 190px;
+ width:100%;
+ display: flex;
+ align-items:center;
+ /* justify-content: space-between; */
+`
+export const SliderContent = styled.div`
+ background:lightgray;
+ /* align-self:stretch; */
+ flex:1;
+ margin: 0 2px;
+`
+
+type ArrowPropType = {
+    currentIndex:number
+}
+
+export const LeftArrow = styled(FaChevronLeft)<ArrowPropType>`
+    background:black;
+    padding:4px;
+    cursor:pointer;
+    /* flex:1; */
+    opacity:${({currentIndex}) => currentIndex !== 0 ? 0.1 : 1}
    
+`
+
+export const RightArrow = styled(FaChevronRight)<ArrowPropType>`
+    background:black;
+    padding:4px;
+    cursor:pointer;
+    opacity:${({currentIndex}) => currentIndex !== 0 ? 0.1 : 1}
+    /* flex:1; */
 `

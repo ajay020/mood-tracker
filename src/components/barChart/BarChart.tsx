@@ -23,13 +23,38 @@ import {
     plugins: {
       legend: {
         position: 'top' as const,
+        display:false
       },
       title: {
-        display: false,
+        display: true,
         text: 'Mood Chart',
+        color:'#fff'
       },
     
     },
+    scales:{
+        yAxes:{
+            grid:{
+                // color:"gray"
+            },
+            ticks:{
+                beginAtZero: true,
+                color: 'white',
+                fontSize: 12,
+            }
+        },
+        xAxes: {
+            grid: {
+                // drawBorder: true,
+                // color: 'gray',
+            },
+            ticks:{
+                beginAtZero: true,
+                color: 'white',
+                fontSize: 12,
+            }
+        },
+    }
   };
 
   const labels = ['Angry', 'Sad', 'Okay', 'Cool', 'Happy'];
@@ -45,7 +70,8 @@ const BarChart = ({moodFrequencies}:BarChartPropType) =>{
         labels,
         datasets: [
           { 
-            label:"Mood Chart" ,
+            datasetIdKey :1,
+            // label:"" ,
             data: moodFrequencies,
             backgroundColor: ["red", "blue", "lightblue", "greenyellow", "green"],
           },

@@ -1,9 +1,10 @@
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import { IconContext } from "react-icons/lib";
 import { v4 as uuidv4 } from 'uuid';
 import { negativeEmotions, positiveEmotions, activities } from './../../data';
 import { useAppDispatch } from "../../app/hook";
 import { addEmotion } from "../../features/emotionSlice";
+import React from 'react';
 import {
     ImWondering,
     ImNeutral,
@@ -16,7 +17,8 @@ import {
     ImSad
   } from "react-icons/im";
 
-
+  import * as i from 'react-icons/fa';
+import styled from 'styled-components';
 import {
         CardWrapper,
         EmojiContainer,
@@ -26,25 +28,29 @@ import {
         EmotionChip,
         HeadingText,
         EmotionContainer,
-        EmotionHeading,
+        EmotionTabs,
         EmojiWrapper,
         EmojiCaption,
-        Angry,
+        Slider,
+        SliderContent,
+        LeftArrow,
+        RightArrow
     } from "./AddEmotion.element";
 
 
 type EmojiPropType = {
     size: string,
-    color: string ,
+    chosenEmoji:string,
     handleChosenEmoji : (emoji:string) => void 
 }
 
-const Emojis = ({ size, color="gray", handleChosenEmoji }: EmojiPropType) => {
-    const [selectedEmoji, setSelectedEmoji] = useState("");
+
+const Emojis = React.memo(({ size, chosenEmoji, handleChosenEmoji }: EmojiPropType) => {
+    const [selectedEmoji, setSelectedEmoji] = useState(chosenEmoji);
 
     const handleEmoji = (emoji: string) =>{
-        handleChosenEmoji(emoji);
         setSelectedEmoji(emoji);
+        handleChosenEmoji(emoji);
     }
 
   return (
@@ -71,7 +77,7 @@ const Emojis = ({ size, color="gray", handleChosenEmoji }: EmojiPropType) => {
         </EmojiWrapper>
     </>
   );
-};
+})
 
 type EmotionsProp = {
     emotionType:string 
@@ -85,7 +91,6 @@ const Emotions = ({emotionType, handleChosenEmotions, chosenEmotions}: EmotionsP
                         positiveEmotions : (emotionType === "negative" ?
                         negativeEmotions : activities);
                    
-
   return (
     <EmotionChipWrapper>
       {chooseEmotion.map((emotion) => (
@@ -107,6 +112,7 @@ const AddEmotions = () => {
     const [chosenEmotions, setChosenEmotions] = useState<string[]>([]);
     const [chosenEmoji, setChosenEmoji] = useState<string>("");
     const [emotionDesc, setEmotionDesc] = useState<string>("");
+    const [currentIndex, setCurrentIndex] = useState<number>(0);
 
     const dispatch = useAppDispatch();
 
@@ -117,6 +123,9 @@ const AddEmotions = () => {
         setEmotionType("negative");
     }
 
+    
+
+
     const handleChosenEmotions = (emotion:string) =>{
         setChosenEmotions(prevChosen => {
             return (
@@ -126,9 +135,11 @@ const AddEmotions = () => {
         })  ; 
        
     }
-    const handleChosenEmoji = (emoji: string) =>{
+
+    const handleChosenEmoji  = useCallback( (emoji: string) =>{
         setChosenEmoji(emoji);
-    }
+    },[chosenEmoji]);
+   
 
     const handleAddEmotions = ()=>{
         const newEmotion = {
@@ -141,23 +152,29 @@ const AddEmotions = () => {
         if(chosenEmoji){
             dispatch(addEmotion(newEmotion))
         }
-        // console.log(newEmotion);
         setChosenEmoji("");
         setChosenEmotions([]);
         setEmotionDesc("");
+        setCurrentIndex(0);
     }
 
-  return (
-      <IconContext.Provider value={{color:'black'}}>
-        <CardWrapper>
-            <HeadingText fontSize="medium">How are you doing?</HeadingText>
-            <EmojiContainer>
-                <Emojis size="32px" color="gray" handleChosenEmoji={handleChosenEmoji} />
-            </EmojiContainer>
-            <HeadingText  fontSize="medium">What emotions are you experincing?</HeadingText>
 
+    const SlideOne = () => {
+        return (
+                <EmotionContainer>
+                    <HeadingText fontSize="medium">How are you doing?</HeadingText>
+                    <EmojiContainer>
+                        <Emojis size="32px" chosenEmoji = {chosenEmoji} handleChosenEmoji={handleChosenEmoji} />
+                    </EmojiContainer>
+                </EmotionContainer>
+            );
+    }
+
+    const SlideTwo = () =>{
+        return (
             <EmotionContainer>
-                <EmotionHeading>
+            <HeadingText  fontSize="medium">What emotions are you experincing?</HeadingText>
+                <EmotionTabs>
                     <HeadingText
                     onClick={selectPositive} 
                     bottomBorder={emotionType === "positive"}
@@ -170,7 +187,7 @@ const AddEmotions = () => {
                     fontSize="small">
                         Negative
                     </HeadingText>
-                </EmotionHeading>
+                </EmotionTabs>
                 {
                     emotionType
                         ? <Emotions
@@ -183,6 +200,13 @@ const AddEmotions = () => {
                             handleChosenEmotions = {handleChosenEmotions}/>
                 }
 
+            </EmotionContainer>
+        )
+    }
+
+    const SlideThree = () => {
+        return (
+            <EmotionContainer>
                 <HeadingText  fontSize="medium">What activities have you been doing?</HeadingText>
                 <Emotions
                     emotionType="activities" 
@@ -190,12 +214,61 @@ const AddEmotions = () => {
                     chosenEmotions={chosenEmotions}
                 />
             </EmotionContainer>
+        )
+    }
+    const SlideFour = () =>{
+        return (
+            <EmotionContainer>
+             <StyledInput
+                value={emotionDesc}
+                onChange={(e) => setEmotionDesc(e.target.value)} 
+                placeholder="Describe your emotions..."
+                 />
+             <ButtonSave onClick={handleAddEmotions}>Save</ButtonSave>
+            </EmotionContainer>
+        )
+    }
+    const slides = [SlideOne, SlideTwo, SlideThree, SlideFour];
 
-            <StyledInput
-              value={emotionDesc}
-               onChange={(e) => setEmotionDesc(e.target.value)} 
-              placeholder="Describe your emotions..." />
-            <ButtonSave onClick={handleAddEmotions}>Save</ButtonSave>
+    const prvSlide = () =>{
+        setCurrentIndex( (prvIndex) => {
+            if(prvIndex != 0){
+                return prvIndex-1;
+            }
+            return prvIndex;
+        });
+    }
+    const nextSlide = () =>{
+        setCurrentIndex(prvIndex =>{
+            if(prvIndex < slides.length-1){
+                return prvIndex+1;
+            }
+            return prvIndex;
+        });
+    }
+
+
+
+  return (
+      <IconContext.Provider value={{color:'darkgray'}}>
+        <CardWrapper>
+                <Slider>
+                    <LeftArrow 
+                     currentIndex={currentIndex === 0 ? 1 : 0}
+                     onClick={prvSlide} size={30}
+                     />
+                    <SliderContent>
+                        {
+                            slides.map((Slide, index) => {
+                                return (currentIndex == index)&& <Slide key={index}/>
+                            })
+                        }
+                    </SliderContent>
+                    <RightArrow 
+                        currentIndex={currentIndex === slides.length-1 ? 1 : 0}
+                        onClick={nextSlide}  size={30}
+                        />
+                </Slider>
         </CardWrapper>
     </IconContext.Provider>
   );
