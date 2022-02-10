@@ -19,7 +19,6 @@ export let negativeEmotions = [
     "Lost",
     "Worried",
     "Confused",
-    "Happy",
     "Sad",
     "Frustrated",
     "stressed",
@@ -63,7 +62,7 @@ export let negativeEmotions = [
     {
         id:"4",
         date: new Date(2022, 1, 4).getTime().toString(),
-        chosenEmoji:"neutral",
+        chosenEmoji:"okay",
         chosenEmotions:["relax"],
         emotionDesc:"It's okay."
     },
@@ -77,7 +76,7 @@ export let negativeEmotions = [
     {
         id:"6",
         date: new Date(2022, 0, 25).getTime().toString(),
-        chosenEmoji:"neutral",
+        chosenEmoji:"okay",
         chosenEmotions:["relax"],
         emotionDesc:"It's okay."
     },

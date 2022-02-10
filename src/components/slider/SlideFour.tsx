@@ -27,9 +27,9 @@ type SlideFourPropsType = {
     handleAddEmotions: (emotinDescription: string) => void 
 }
 
-const SliderFour = ({handleAddEmotions}: SlideFourPropsType) =>{
+const SlideFour = ({handleAddEmotions}: SlideFourPropsType) =>{
     const [emotionDescription, setEmotionDescription] = useState("");
-    console.log("child");
+    console.log("SliderFour");
 
     return ( 
         <EmotionContainer>
@@ -43,4 +43,4 @@ const SliderFour = ({handleAddEmotions}: SlideFourPropsType) =>{
    )
 }
 
-export default React.memo( SliderFour);
+export default React.memo( SlideFour);

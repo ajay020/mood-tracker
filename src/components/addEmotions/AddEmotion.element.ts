@@ -1,5 +1,3 @@
-import { ImAngry } from "react-icons/im";
-import { IconContext } from "react-icons/lib";
 import styled from "styled-components";
 import {FaChevronRight, FaChevronLeft} from 'react-icons/fa'
 
@@ -15,13 +13,7 @@ export const CardWrapper = styled.div`
   align-items: center;
 `;
 
-export const Angry = styled(ImAngry)`
- /* color:${({color}) => color };  */
- &:hover{
-     /* background:${({color}) => color }; */
-     color:${({color}) =>"red" }; 
- }
-`
+
 export const EmojiContainer = styled.div`
   display: flex;
   flex-wrap:wrap;
@@ -29,22 +21,7 @@ export const EmojiContainer = styled.div`
   /* background-color: green; */
   /* width: 70%; */
 `;
-export const EmojiWrapper = styled.span`
-    margin: 0 8px;
-    cursor: pointer;
-    /* background:pink; */
-    &:hover{
-        /* background:pink; */
-        transform: translate(.3px, .4px);
-    }
-`
-export const EmojiCaption = styled.span`
- text-align: center;
- font-size:14px;
- line-height: 18px;
- display:block;
- color : ${({color}) => color};
-`
+
 
 type EmotionChipPropType = {
     selected?:boolean 
@@ -93,12 +70,6 @@ export const EmotionContainer = styled.div`
     padding:1rem;
 `
 
-export const EmotionTabs = styled.div`
-    display:flex;
-    justify-content: space-evenly;
-    /* background: grey; */
-    width: 100%;
-`
 export const Slider = styled.div`
  background:lightgray;
  min-height: 190px;
@@ -115,7 +86,7 @@ export const SliderContent = styled.div`
 `
 
 type ArrowPropType = {
-    currentIndex:number
+    currentindex:number
 }
 
 export const LeftArrow = styled(FaChevronLeft)<ArrowPropType>`
@@ -123,7 +94,7 @@ export const LeftArrow = styled(FaChevronLeft)<ArrowPropType>`
     padding:4px;
     cursor:pointer;
     /* flex:1; */
-    opacity:${({currentIndex}) => currentIndex !== 0 ? 0.1 : 1}
+    opacity:${({currentindex}) => currentindex !== 0 ? 0.1 : 1}
    
 `
 
@@ -131,6 +102,6 @@ export const RightArrow = styled(FaChevronRight)<ArrowPropType>`
     background:black;
     padding:4px;
     cursor:pointer;
-    opacity:${({currentIndex}) => currentIndex !== 0 ? 0.1 : 1}
+    opacity:${({currentindex}) => currentindex !== 0 ? 0.1 : 1}
     /* flex:1; */
 `

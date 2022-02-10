@@ -73,7 +73,7 @@ const BarChart = ({moodFrequencies}:BarChartPropType) =>{
             datasetIdKey :1,
             // label:"" ,
             data: moodFrequencies,
-            backgroundColor: ["red", "blue", "lightblue", "greenyellow", "green"],
+            backgroundColor: ["red", "purple", "teal", "green", "orange"],
           },
         ],
       };
