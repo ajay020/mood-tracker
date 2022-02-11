@@ -10,3 +10,4 @@ export {default as EmojiSelector} from './emojiSelector/EmojiSelector';
 export {default as SlideOne} from './slider/SlideOne';
 export {default as SlideThree} from './slider/SliderThree';
 export {default as SlideTwo} from './slider/SlideTwo';
+export {default as Navbar} from './navbar/Navbar';

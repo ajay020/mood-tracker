@@ -2,11 +2,19 @@ import styled from "styled-components";
 import { useAppSelector } from "../app/hook";
 import { AddEmotions, BarChart, CalendarChart, EmotioncardList } from "../components"
 import { getEmotions } from "../features/emotionSlice";
+import { device } from "../GlobalStyles";
 
 
 const HomeContainer = styled.div`
     background:brown;
+    margin-top:40px;
     display:flex;
+    @media ${device.mobileS}{
+        flex-direction:column;
+    }
+    @media ${device.laptop}{
+        flex-direction:row;
+    }
 `
 const ChartContainer = styled.aside`
     /* background: purple; */
