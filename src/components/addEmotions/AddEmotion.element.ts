@@ -1,12 +1,13 @@
 import styled from "styled-components";
 import {FaChevronRight, FaChevronLeft} from 'react-icons/fa'
+import { colors } from "../../GlobalStyles";
 
 
 export const CardWrapper = styled.div`
   border: 1px solid black;
-  background-color: lightgray;
-  width: 60%;
-  margin: 1rem auto;
+  background-color: white;
+  width: 100%;
+  /* margin: 1rem auto; */
   /* padding: 0.5rem; */
   display: flex;
   flex-direction: column;
@@ -17,9 +18,6 @@ export const CardWrapper = styled.div`
 export const EmojiContainer = styled.div`
   display: flex;
   flex-wrap:wrap;
-  /* justify-content: center; */
-  /* background-color: green; */
-  /* width: 70%; */
 `;
 
 
@@ -71,7 +69,7 @@ export const EmotionContainer = styled.div`
 `
 
 export const Slider = styled.div`
- background:lightgray;
+ background:white;
  min-height: 190px;
  width:100%;
  display: flex;
@@ -79,7 +77,7 @@ export const Slider = styled.div`
  /* justify-content: space-between; */
 `
 export const SliderContent = styled.div`
- background:lightgray;
+ /* background:lightgray; */
  /* align-self:stretch; */
  flex:1;
  margin: 0 2px;
@@ -90,7 +88,7 @@ type ArrowPropType = {
 }
 
 export const LeftArrow = styled(FaChevronLeft)<ArrowPropType>`
-    background:black;
+    background:${colors.primaryBlue};
     padding:4px;
     cursor:pointer;
     /* flex:1; */
@@ -99,7 +97,7 @@ export const LeftArrow = styled(FaChevronLeft)<ArrowPropType>`
 `
 
 export const RightArrow = styled(FaChevronRight)<ArrowPropType>`
-    background:black;
+    background:${colors.primaryBlue};
     padding:4px;
     cursor:pointer;
     opacity:${({currentindex}) => currentindex !== 0 ? 0.1 : 1}

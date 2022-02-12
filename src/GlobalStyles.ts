@@ -5,6 +5,15 @@ box-sizing: border-box;
 margin:0;
 padding:0;
 `
+interface ColorTypes {
+    [key: string] :string 
+}
+
+export const colors: ColorTypes = {
+    primaryBlue:"#01175d",
+    secondaryBlue:"darkblue"
+}
+
 const size = {
     mobileS: '320px',
     mobileM: '375px',
@@ -33,8 +42,8 @@ export const device = {
     padding: 10px 12px;
     color:white;
     border:none;
-    background: darkblue;
-    font-weight: 400;
+    background: ${colors.secondaryBlue};
+    font-weight: 700;
     cursor:pointer;
     width:${({width}) => width};
 

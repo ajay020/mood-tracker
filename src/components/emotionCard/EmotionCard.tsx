@@ -8,8 +8,8 @@ import { useAppDispatch } from './../../app/hook';
 
 const CardWrapper = styled.div`
     border: 1px solid black;
-    background-color: lightgray;
-    width: 60%;
+    background-color: white;
+    /* width: 60%; */
     margin:4px auto;
     display:flex;
     flex-direction: column;

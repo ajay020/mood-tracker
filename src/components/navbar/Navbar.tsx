@@ -2,10 +2,10 @@ import {useState} from 'react';
 import styled from 'styled-components';
 import { FiMenu } from "react-icons/fi";
 import {BsXLg} from 'react-icons/bs';
-import { device, Button } from '../../GlobalStyles';
+import { device, Button, colors } from '../../GlobalStyles';
+import { Link, Outlet } from 'react-router-dom';
 
-const Navlogo = styled.h3`
-    /* background:pink; */
+const Navlogo = styled.h2`
     font-size:20px;
     color:white;
     padding:0;
@@ -13,7 +13,7 @@ const Navlogo = styled.h3`
 `
 
 const NavContainer = styled.nav`
-    background:#01175d;
+    background:${colors.primaryBlue};
     position:fixed;
     top:0;
     width:100%;
@@ -68,18 +68,18 @@ const NavLink = styled.div`
 const NavLinkText = styled.span`
     color:white;
     display:block;
-    /* font-weight: 400; */
+    font-weight: 500;
 `
 type SideDrawerPropsType = {
     toggleDrawer:boolean 
 }
 const SideDrawer = styled.div<SideDrawerPropsType>`
-    background: darkgray;
+     background:${colors.primaryBlue};
     /* opacity: .8; */
     position:absolute;
-    top:44px;
-    left:${({toggleDrawer}) => toggleDrawer ? 0 : "-400px"};
-    width:40vw;
+    top:0px;
+    left:${({toggleDrawer}) => toggleDrawer ? 0 : "-500px"};
+    width:60vw;
     height:100vh;
     display:flex;
     flex-direction:column;
@@ -90,13 +90,12 @@ const SideDrawer = styled.div<SideDrawerPropsType>`
         ${NavLink}{
             margin: 8px 0;        
             width:100%;
-            /* background:lightgray; */
             display:block;
             text-align:center;
-            &:hover{
+            /* &:hover{
                 background:gray;
                 transition: all linear .4s;
-            }
+            } */
         }
     }
     @media ${device.tablet}{
@@ -112,7 +111,7 @@ const Navbar = () =>{
     }
 
     return(
-        <NavContainer>
+        <>   <NavContainer>
             <NavlogoWrapper>
                 <Navlogo>
                     MoodTracker
@@ -127,10 +126,14 @@ const Navbar = () =>{
             </MenuBtnWrapper> 
             <NavLinkWrapper>
                  <NavLink>
-                     <NavLinkText>Dashboard</NavLinkText>
+                   <Link to="/dashboard">
+                         <NavLinkText>Dashboard</NavLinkText>
+                     </Link>
                  </NavLink>
                  <NavLink>
-                    <NavLinkText>Stats</NavLinkText>
+                     <Link to="/stats">
+                         <NavLinkText>Stats</NavLinkText>
+                     </Link>
                  </NavLink>
                  <NavLink>
                      <Button width={"80px"}>Login</Button>
@@ -141,20 +144,27 @@ const Navbar = () =>{
             </NavLinkWrapper>
 
              <SideDrawer toggleDrawer={toggleDrawer}>
-                 <NavLink>
-                     <NavLinkText>Dashboard</NavLinkText>
+                 <NavLink onClick={handleToggleDrawer}>
+                     <Link to="/dashboard">
+                         <NavLinkText>Dashboard</NavLinkText>
+                     </Link>
+                 </NavLink>
+                 <NavLink onClick={handleToggleDrawer}>
+                     <Link to="/stats">
+                         <NavLinkText>Stats</NavLinkText>
+                     </Link>
                  </NavLink>
                  <NavLink>
-                    <NavLinkText>Stats</NavLinkText>
+                     <Button width= {"120px"}>Login</Button>
                  </NavLink>
                  <NavLink>
-                     <Button width= {"100px"}>Login</Button>
-                 </NavLink>
-                 <NavLink>
-                     <Button width= {"100px"}>Sign Up</Button>
+                     <Button width= {"120px"}>Sign Up</Button>
                  </NavLink>
             </SideDrawer>       
-        </NavContainer>
+            </NavContainer>
+            <Outlet/>
+        </>
+
     );
 }
 

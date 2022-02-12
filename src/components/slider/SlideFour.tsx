@@ -1,5 +1,6 @@
 import React,{ useState } from 'react';
 import styled from "styled-components";
+import { colors } from '../../GlobalStyles';
 import { EmotionContainer } from "../addEmotions/AddEmotion.element";
 
 export const StyledInput = styled.textarea`
@@ -14,7 +15,7 @@ export const StyledInput = styled.textarea`
   min-height: 100px;
 `;
 export const ButtonSave = styled.button`
-  background: black;
+  background: ${colors.primaryBlue};
   padding: 8px 12px;
   border: none;
   color: white;

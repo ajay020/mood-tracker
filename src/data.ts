@@ -23,6 +23,8 @@ export let negativeEmotions = [
     "Frustrated",
     "stressed",
     "Overwelming",
+    "Tired",
+    "Guilty"
   ];
 
  export let positiveEmotions = [
@@ -30,11 +32,23 @@ export let negativeEmotions = [
       "Excited",
       "Calm",
       "Content",
-      "Hopeful"
+      "Hopeful",
+      "Greatful",
+      "Hopeful",
+      "Relieved",
+      "Loved"
   ];
 
  export  let activities = [
-      "Work", "Family", "Exercise", "Food", "Games", "Shopping", "Hobby"
+      "Work", 
+      "Family",
+       "Exercise", 
+      "Food", 
+      "Games", 
+      "Shopping", "Hobby",
+      "Sleep",
+      "School",
+      "Relax"
   ];
 
  export const fakeData = [
@@ -68,17 +82,24 @@ export let negativeEmotions = [
     },
     {
         id:"5",
-        date: new Date(2022, 0, 30).getTime().toString(),
+        date: new Date(2022, 1, 10).getTime().toString(),
         chosenEmoji:"angry",
-        chosenEmotions:["frustrated"],
+        chosenEmotions:["frustrated", "tired"],
         emotionDesc:"Feeling angry"
     },
     {
         id:"6",
-        date: new Date(2022, 0, 25).getTime().toString(),
+        date: new Date(2022, 1, 12).getTime().toString(),
         chosenEmoji:"okay",
-        chosenEmotions:["relax"],
-        emotionDesc:"It's okay."
+        chosenEmotions:["relax", "Calm"],
+        emotionDesc:"I did workout and some meditation."
+    },
+    {
+        id:"7",
+        date: new Date(2022, 1, 13).getTime().toString(),
+        chosenEmoji:"sad",
+        chosenEmotions:["angry", "guilty", "stressed", "worried"],
+        emotionDesc:"I did workout and some meditation."
     },
 
  ]
