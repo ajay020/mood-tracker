@@ -7,7 +7,7 @@ export type EmotionType = {
     id:string,
     chosenEmoji:string,
     chosenEmotions: string[],
-    emotionDesc: string ,
+    emotionDescription: string ,
     date: string
 }
 

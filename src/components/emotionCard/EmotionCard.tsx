@@ -127,7 +127,7 @@ const EmotionCard = ({emotion}: EmotionCardPropType) => {
                     }
                 </Wrapper>
                 <CardBodyContent>
-                    {emotion.emotionDesc}
+                    {emotion.emotionDescription}
               </CardBodyContent>
             </CardBody>
         </CardWrapper>

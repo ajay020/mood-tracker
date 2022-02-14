@@ -23,7 +23,7 @@ const CalendarChart = () => {
 
     const handleTileContent = ({ activeStartDate, date, view }: TileContentPorp) =>{
 
-        const emotion  = emotions.find(emotion => emotion.date === date.getTime().toString());
+        const emotion  = emotions.find(emotion => new Date(emotion.date).getTime().toString() === date.getTime().toString());
         if(emotion){
             return(
                     <EmojiWrapper> 

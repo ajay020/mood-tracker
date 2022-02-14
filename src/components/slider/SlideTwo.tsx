@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useRef, useState } from "react";
 import styled from 'styled-components';
 import { EmotionContainer, HeadingText } from "../addEmotions/AddEmotion.element";
 import { Emotions } from "..";
@@ -6,7 +6,6 @@ import { Emotions } from "..";
 const EmotionTabs = styled.div`
     display:flex;
     justify-content: space-evenly;
-    /* background: grey; */
     width: 100%;
 `
 type SlideTwoPropTypes = {
@@ -14,16 +13,21 @@ type SlideTwoPropTypes = {
     handleChosenEmotions:(emotion:string)=> void 
 }
 
+let selectedTab:string ="positive";
+
 const SlideTwo = ({chosenEmotions,handleChosenEmotions }:SlideTwoPropTypes) =>{
-    const [emotionType, setEmotionType] = useState("positive");
+    const [emotionType, setEmotionType] = useState(selectedTab);
 
     console.log("SliderTwo");
 
     const selectPositive = () =>{
         setEmotionType("positive");
+        selectedTab = "positive";
     }
     const selectNegative = () =>{
         setEmotionType("negative");
+        selectedTab = "negative";
+
     }
     return (
         <EmotionContainer>
@@ -31,13 +35,13 @@ const SlideTwo = ({chosenEmotions,handleChosenEmotions }:SlideTwoPropTypes) =>{
             <EmotionTabs>
                 <HeadingText
                 onClick={selectPositive} 
-                bottomBorder={emotionType === "positive"}
+                bottomBorder={selectedTab === "positive"}
                 fontSize="small">
                     Positive
                 </HeadingText>
                 <HeadingText 
                 onClick={selectNegative} 
-                bottomBorder={emotionType === "negative"} 
+                bottomBorder={selectedTab === "negative"} 
                 fontSize="small">
                     Negative
                 </HeadingText>
@@ -58,4 +62,4 @@ const SlideTwo = ({chosenEmotions,handleChosenEmotions }:SlideTwoPropTypes) =>{
         )
 }
 
-export default SlideTwo;
+export default React.memo( SlideTwo);
