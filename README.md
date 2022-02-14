@@ -1,6 +1,6 @@
 <!-- ![alt text](https://media.giphy.com/media/vFKqnCdLPNOKc/giphy.gif) -->
 
-![alt text](moodtracker2.gif)
+![alt text](img/moodtracker2.gif)
 
 # Getting Started with Create React App
 
