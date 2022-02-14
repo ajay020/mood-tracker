@@ -26,7 +26,7 @@ export const emotionSlice = createSlice({
     initialState,
     reducers:{
         addEmotion : (state, action) =>{
-            state.emotions = [...state.emotions, action.payload];
+            state.emotions = [ action.payload, ...state.emotions];
         },
         deleteEmotion: (state, action) => {
             state.emotions = state.emotions.filter(em => em.id !== action.payload);

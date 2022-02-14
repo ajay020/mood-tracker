@@ -94,7 +94,7 @@ type EmotionCardPropType = {
 const EmotionCard = ({emotion}: EmotionCardPropType) => {
     const dispatch = useAppDispatch();
 
-    const date = new Date( parseInt( emotion.date ));
+    const date = new Date(emotion.date );
 
     const handleDelete = (emotionId : string) =>{
         dispatch(deleteEmotion(emotionId));

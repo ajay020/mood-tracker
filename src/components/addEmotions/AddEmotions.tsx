@@ -42,7 +42,7 @@ const AddEmotions = () => {
     const handleAddEmotions = (emotionDescription: string)=>{
         const newEmotion = {
             id: uuidv4(),
-            date: new Date().getMilliseconds().toString(),
+            date: new Date().toString(),
             chosenEmoji,
             chosenEmotions,
             emotionDescription

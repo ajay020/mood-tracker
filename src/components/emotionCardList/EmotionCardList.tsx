@@ -4,6 +4,7 @@ import {  useAppSelector } from './../../app/hook';
 
 function EmotionList() {
     const emotions = useAppSelector(getEmotions);
+    
 
     return (
         <>
