@@ -57,7 +57,6 @@ const BarGrapContainer = styled.div`
     }
 `
 
-
 const Stats  = () => {
 
     const emotions = useAppSelector(getEmotions)
