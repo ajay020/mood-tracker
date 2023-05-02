@@ -24,8 +24,6 @@ const SlideTwo = ({
 }: SlideTwoPropTypes) => {
   const [emotionType, setEmotionType] = useState(selectedTab);
 
-  console.log("SliderTwo");
-
   const selectPositive = () => {
     setEmotionType("positive");
     selectedTab = "positive";
