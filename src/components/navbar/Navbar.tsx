@@ -17,7 +17,7 @@ const NavContainer = styled.nav`
   position: fixed;
   top: 0;
   width: 100%;
-  padding: 0.5rem 2rem;
+  padding: 1rem 2rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -159,7 +159,9 @@ const Navbar = () => {
             </Link>
           </NavLink>
           <NavLink>
-            <Button width={"120px"}>Sign Up</Button>
+            <Link to="/signup">
+              <NavLinkText>SignUp</NavLinkText>
+            </Link>
           </NavLink>
         </SideDrawer>
       </NavContainer>

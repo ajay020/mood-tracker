@@ -10,7 +10,7 @@ import { getEmotions } from "../features/emotionSlice";
 import { device } from "../GlobalStyles";
 
 const HomeContainer = styled.div`
-  margin-top: 40px;
+  margin-top: 48px;
   display: flex;
   justify-content: center;
   @media ${device.mobileS} {
