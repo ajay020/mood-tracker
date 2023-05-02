@@ -51,54 +51,42 @@ export let activities = [
   "Relax",
 ];
 
+const today = new Date();
+
+let d = 24 * 60 * 60 * 1000;
+
+const onedayago = today.getTime() - d;
+const twodayago = today.getTime() - d * 2;
+const threedayago = today.getTime() - d * 3;
+const fourdayago = today.getTime() - d * 4;
+
 export const fakeData = [
   {
     id: "1",
-    date: new Date(2023, 4, 5).toString(),
+    date: new Date(onedayago).toString(),
     chosenEmoji: "happy",
     chosenEmotions: ["happy", "calm", "gratful"],
     emotionDescription: "It's a great day",
   },
   {
     id: "2",
-    date: new Date(2023, 4, 5).toString(),
+    date: new Date(twodayago).toString(),
     chosenEmoji: "sad",
     chosenEmotions: ["tense", "tired", "worried"],
-    emotionDescription: "It's a tough day.",
+    emotionDescription: "It's a tough day. Felt overwhelmed",
   },
   {
     id: "3",
-    date: new Date(2023, 4, 3).toString(),
+    date: new Date(threedayago).toString(),
     chosenEmoji: "cool",
     chosenEmotions: ["relax", "excited"],
     emotionDescription: "I am feeling amazing!!",
   },
   {
     id: "4",
-    date: new Date(2023, 4, 20).toString(),
-    chosenEmoji: "okay",
-    chosenEmotions: ["relax", "greatful"],
-    emotionDescription: "It's okay.",
-  },
-  {
-    id: "5",
-    date: new Date(2023, 4, 15).toString(),
-    chosenEmoji: "angry",
-    chosenEmotions: ["frustrated", "tired"],
-    emotionDescription: "Feeling angry",
-  },
-  {
-    id: "6",
-    date: new Date(2023, 4, 12).toString(),
-    chosenEmoji: "okay",
-    chosenEmotions: ["relax", "Calm"],
-    emotionDescription: "I did workout and some meditation.",
-  },
-  {
-    id: "7",
-    date: new Date(2023, 4, 13).toString(),
-    chosenEmoji: "sad",
-    chosenEmotions: ["angry", "guilty", "stressed", "worried"],
-    emotionDescription: "I did workout and some meditation.",
+    date: new Date(fourdayago).toString(),
+    chosenEmoji: "happy",
+    chosenEmotions: ["relax", "calm", "content"],
+    emotionDescription: "Feeling alright.",
   },
 ];
