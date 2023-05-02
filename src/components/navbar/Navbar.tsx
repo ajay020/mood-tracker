@@ -114,7 +114,13 @@ const Navbar = () => {
       {" "}
       <NavContainer>
         <NavlogoWrapper>
-          <Navlogo>MoodTracker</Navlogo>
+          <NavLink>
+            <Link to="/">
+              <NavLinkText>
+                <Navlogo> MoodTracker</Navlogo>
+              </NavLinkText>
+            </Link>
+          </NavLink>
         </NavlogoWrapper>
         <MenuBtnWrapper>
           {toggleDrawer ? (
@@ -135,10 +141,9 @@ const Navbar = () => {
             </Link>
           </NavLink>
           <NavLink>
-            <Button width={"80px"}>Login</Button>
-          </NavLink>
-          <NavLink>
-            <Button width={"80px"}>Sign Up</Button>
+            <Link to="/signup">
+              <NavLinkText>SignUp</NavLinkText>
+            </Link>
           </NavLink>
         </NavLinkWrapper>
 
@@ -152,9 +157,6 @@ const Navbar = () => {
             <Link to="/stats">
               <NavLinkText>Stats</NavLinkText>
             </Link>
-          </NavLink>
-          <NavLink>
-            <Button width={"120px"}>Login</Button>
           </NavLink>
           <NavLink>
             <Button width={"120px"}>Sign Up</Button>

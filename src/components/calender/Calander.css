@@ -106,9 +106,10 @@
   /* background-color: #e6e6e6; */
 }
 .react-calendar__tile--now {
-  background: blue;
-  color: white;
+  background: wheat;
+  color: black;
   /* border-radius: 70%; */
+  font-weight: bold;
 }
 .react-calendar__tile--now:enabled:hover,
 .react-calendar__tile--now:enabled:focus {
