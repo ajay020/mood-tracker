@@ -1,45 +1,49 @@
-import Calendar  from 'react-calendar';
+import Calendar from "react-calendar";
 import styled from "styled-components";
 import { EmojiIcon } from "..";
 
-import { getEmotions } from '../../features/emotionSlice';
-import { useAppSelector } from '../../app/hook';
-import './Calander.css';
+import { getEmotions } from "../../features/emotionSlice";
+import { useAppSelector } from "../../app/hook";
+import "./Calander.css";
 
 type TileContentPorp = {
-    activeStartDate: Date 
-    date: Date,
-    view: string
-}
+  activeStartDate: Date;
+  date: Date;
+  view: string;
+};
 
 const EmojiWrapper = styled.span`
-    margin-left:2px;
-    /* background:black; */
-`
+  margin-left: 2px;
+`;
 
 const CalendarChart = () => {
+  const emotions = useAppSelector(getEmotions);
 
-    const emotions = useAppSelector(getEmotions);
+  const handleTileContent = ({
+    activeStartDate,
+    date,
+    view,
+  }: TileContentPorp) => {
+    const emotion = emotions.find((emotion) => {
+      let currDate = new Date(emotion.date);
+      currDate.setHours(0, 0, 0, 0);
+      date.setHours(0, 0, 0, 0);
 
-    const handleTileContent = ({ activeStartDate, date, view }: TileContentPorp) =>{
+      return currDate.getTime() === date.getTime();
+    });
 
-        const emotion  = emotions.find(emotion => new Date(emotion.date).getTime().toString() === date.getTime().toString());
-        if(emotion){
-            return(
-                    <EmojiWrapper> 
-                        <EmojiIcon type={emotion.chosenEmoji} size="24px"/>
-                    </EmojiWrapper>
-                 );
-        }
-
-        return null;
+    if (emotion) {
+      return (
+        <EmojiWrapper>
+          <EmojiIcon type={emotion.chosenEmoji} size="24px" />
+        </EmojiWrapper>
+      );
     }
 
-    return (
-         <Calendar 
-             tileContent = {handleTileContent}
-        />);
+    return null;
+  };
 
-}
+  return <Calendar tileContent={handleTileContent} />;
+};
 
 export default CalendarChart;
